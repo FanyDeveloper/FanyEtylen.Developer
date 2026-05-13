@@ -1,0 +1,209 @@
+/* ==========================================================================
+   About Section
+   ========================================================================== */
+
+.about {
+  position: relative;
+  min-height: 100vh;
+  padding: 8rem 0;
+  background-color: #020202;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+}
+
+/* Background Grid Pattern */
+.about__bg-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+  background-size: 32px 32px;
+  z-index: 0;
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+}
+
+/* Abstract Ambient Glow */
+.about__bg-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about__bg-glow::before {
+  content: "";
+  position: absolute;
+  width: 80vw;
+  max-width: 1000px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(147, 51, 234, 0.08) 0%, rgba(34, 211, 238, 0.03) 40%, transparent 70%);
+  filter: blur(80px);
+}
+
+.about__container {
+  position: relative;
+  width: 90%;
+  max-width: var(--container-max, 1200px);
+  margin: 0 auto;
+  z-index: 5;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 80vh;
+}
+
+/* Loose Content Wrapper */
+.about__content {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  padding: 4rem 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  transform: translateX(-2%);
+}
+
+@media (max-width: 768px) {
+  .about__content {
+    padding: 3rem 0;
+  }
+}
+
+/* Main Title (Inspired by Projects section title font but smaller) */
+.about__title {
+  font-family: var(--font-sans);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  color: var(--color-text, #fff);
+  margin: 0 0 3rem 0;
+}
+
+.about__highlight {
+  color: var(--color-text-soft, #d4d4d8);
+  background: linear-gradient(to right, #fff, #a1a1aa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (max-width: 768px) {
+  .about__title {
+    margin-bottom: 2.5rem;
+  }
+
+  .about__br {
+    display: none;
+  }
+}
+
+/* Body Text */
+.about__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.about__body::before {
+  content: "";
+  position: absolute;
+  left: -1.5rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .about__body::before {
+    left: -1rem;
+  }
+}
+
+.about__body .word-reveal-p {
+  font-family: var(--font-sans);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.35;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin: 0;
+  max-width: 1000px;
+  color: #ffffff;
+}
+
+.word-reveal-span {
+  transition: opacity 0.1s ease-out;
+}
+
+/* --- Reveal Animations --- */
+.about .iv {
+  opacity: 0;
+  transform: translateY(20px);
+  filter: blur(4px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.about .iv.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0px);
+}
+
+/* --- Portrait Photo Background --- */
+.about__photo-bg {
+  position: absolute;
+  top: 15.5rem; /* Aligns with "Minha trajetória no desenvolvimento web" */
+  right: 0;
+  width: 55%;
+  max-width: 612px;
+  z-index: 1;
+  opacity: 0.45; /* Soft background blend */
+  pointer-events: none;
+}
+
+.about__photo-bg img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Smoothly melts the photo edges into the background */
+.about__photo-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(to right, #020202 0%, transparent 40%),
+    linear-gradient(to top, #020202 0%, transparent 30%);
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .about {
+    min-height: auto;
+    padding: 6rem 0;
+  }
+  .about__photo-bg {
+    width: 80%;
+    top: 13.5rem; /* Aligns with body text start on mobile */
+    right: -5%; /* Let it bleed off the edge slightly on mobile if needed, or keep right: 0 */
+    opacity: 0.3; /* Slightly more subtle on mobile for readability */
+  }
+}

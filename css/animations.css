@@ -1,0 +1,88 @@
+/* ==========================================================================
+   KEYFRAMES — não remover, usados pelo sistema .iv e pelas animações do hero
+   ========================================================================== */
+
+@keyframes animationIn {
+  0%   { opacity: 0; transform: translateY(30px); filter: blur(8px); }
+  100% { opacity: 1; transform: translateY(0);    filter: blur(0);   }
+}
+
+@keyframes auraReveal {
+  0%   { opacity: 0; transform: translateY(20px); filter: blur(6px); }
+  100% { opacity: 1; transform: translateY(0);    filter: blur(0);   }
+}
+
+@keyframes rotate-gradient {
+  0%   { transform: translate(-50%, -50%) rotate(0deg);   }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes ring-spin {
+  from { transform: rotate(0deg);   }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes wordReveal {
+  0%   { transform: translateY(110%); }
+  100% { transform: translateY(0%);   }
+}
+
+@keyframes navSlideIn {
+  0%   { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0);     }
+}
+
+/* ==========================================================================
+   NAVBAR — anima no load, não depende de scroll
+   ========================================================================== */
+.navbar__inner {
+  animation: navSlideIn 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s both;
+}
+
+/* ==========================================================================
+   ANIMATE WHEN IN VIEW — sistema .iv / .is-visible
+   --------------------------------------------------------------------------
+   Cada elemento animável recebe:
+     class="iv"
+     style="animation: <keyframe> <duration> <easing> <delay>ms both"
+
+   .iv pausa a animação no frame 0% via fill-mode:both (sem opacity:0 estático).
+   .is-visible (adicionada pelo IntersectionObserver) a coloca para rodar.
+   ========================================================================== */
+
+.iv {
+  animation-play-state: paused !important;
+}
+
+.iv.is-visible {
+  animation-play-state: running !important;
+}
+
+/* ---------- Word-reveal wrapper (overflow hidden) ---------- */
+.word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  line-height: inherit;
+  padding-bottom: 0.16em;
+  margin-bottom: -0.16em;
+}
+
+/* ==========================================================================
+   Reduced motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .navbar__inner {
+    animation: none !important;
+  }
+  .hero__cta-shimmer-ring,
+  .hero-ring {
+    animation: none !important;
+  }
+  .iv {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
