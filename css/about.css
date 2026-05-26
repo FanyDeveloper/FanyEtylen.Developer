@@ -5,7 +5,8 @@
 .about {
   position: relative;
   width: 100%;
-  height: 250vh; /* Aumentado de 100vh para permitir um longo efeito de scroll */
+  height: 250vh;
+  /* Aumentado de 100vh para permitir um longo efeito de scroll */
   background: #fff;
   z-index: 10;
 }
@@ -31,6 +32,15 @@
   will-change: transform;
 }
 
+/* ── Image Overlay Layer ─────────────────────────────────────────── */
+.about__image-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45); /* Cobertura escura na imagem durante a revelação gradual */
+  z-index: 2;
+  pointer-events: none;
+}
+
 /* ── Text Mask Layer ─────────────────────────────────────────────── */
 /* White background + black text + mix-blend-mode: screen
    = white areas stay white, black text becomes transparent
@@ -38,7 +48,7 @@
 .about__mask {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 3;
   background: #fff;
   mix-blend-mode: screen;
   display: flex;
@@ -79,5 +89,43 @@
 @media (max-width: 480px) {
   .about__mask-line {
     font-size: clamp(1.8rem, 12vw, 3rem);
+  }
+}
+
+.about__bio {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10vw;
+  text-align: center;
+  pointer-events: none;
+  /* Allows the user to click through if necessary */
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.65) 100%);
+}
+
+.about__bio p {
+  font-family: var(--font-sans);
+  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+  line-height: 1.5;
+  color: #fff;
+  max-width: 950px;
+  margin-bottom: 2rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+}
+
+@media (max-width: 768px) {
+  .about__bio {
+    padding: 0 5vw;
+  }
+
+  .about__bio p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
   }
 }
